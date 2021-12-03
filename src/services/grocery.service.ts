@@ -1,23 +1,23 @@
 export const groceryService = {
-  //   addItem,
+  addItem,
   getItems,
 };
 
 export interface IGroceryItem {
   itemName: string;
-  amount: number;
-  desc: string;
+  desc?: string;
 }
 
 const items = [
   {
     itemName: "חלב",
-    amount: 1,
     desc: "רק חלב אחוז 1",
   },
 ];
 
-// function addItem() {}
+function addItem(item: string) {
+  console.log(item);
+}
 
 function getItems(): Promise<IGroceryItem[]> {
   return Promise.resolve(items);

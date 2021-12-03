@@ -7,6 +7,7 @@ interface IItemListProps {
 }
 
 export const ItemList = ({ items }: IItemListProps) => {
+
     return (
         <main className="item-list">
             {items && items.map((item, idx) => (

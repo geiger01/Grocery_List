@@ -7,12 +7,16 @@ export const GroceryPage = () => {
 
     const [items, setItems] = useState<IGroceryItem[]>()
 
-    useEffect(() => {
+    async function addItem(item: string) {
+        groceryService.addItem(item)
+    }
 
-        async function loadItems() {
-            const items = await groceryService.getItems()
-            setItems(items)
-        }
+    async function loadItems() {
+        const items = await groceryService.getItems()
+        setItems(items)
+    }
+
+    useEffect(() => {
         loadItems()
 
     }, [])
@@ -20,8 +24,8 @@ export const GroceryPage = () => {
 
     return (
         <>
-            <ItemInput />
             <ItemList items={items} />
+            <ItemInput addItem={addItem} />
         </>
 
     )

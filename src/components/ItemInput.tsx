@@ -1,10 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-export const ItemInput = () => {
+
+import { AiFillPlusSquare } from "react-icons/ai";
+
+export const ItemInput = ({ addItem }: { addItem: (item: string) => void }) => {
+
+    const [item, setItem] = useState('')
+
     return (
         <div className="item-input-wrapper">
-
-            <input className="item-input" type="text" />
+            <input value={item} onChange={(e) => setItem(e.target.value)} className="item-input" type="text" />
+            <div onClick={() => addItem(item)} className="plus-icon">
+                <AiFillPlusSquare />
+            </div>
         </div>
     )
 }
