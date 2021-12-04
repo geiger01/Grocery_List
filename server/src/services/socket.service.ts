@@ -19,9 +19,6 @@ function connectSockets(http: any, session: any) {
     });
 
     socket.on("update-list", (data: any) => {
-
-      console.log(data);
-      
       socket.broadcast.to(socket.myRoom).emit("update-list-return", data);
     });
   });

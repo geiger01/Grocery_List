@@ -47,6 +47,7 @@ export const GroceryPage = () => {
             socketService.off('roomId')
             socketService.off('update-list-return')
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
 
