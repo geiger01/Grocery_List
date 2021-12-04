@@ -52,6 +52,7 @@ body {
     }
   }
   button {
+    cursor: pointer;
     border: none;
     color: #292929;
     padding: 0.6rem 1.3rem;
@@ -59,6 +60,12 @@ body {
     margin-top: 1.3rem;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     border-radius: 4px;
+
+    transition: 0.2s;
+
+    &:hover {
+      transform: translateY(2px);
+    }
   }
 }
 
