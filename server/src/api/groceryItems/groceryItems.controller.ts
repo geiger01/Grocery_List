@@ -23,10 +23,7 @@ async function updateGroceryItems(req: Request, res: Response) {
   }
 }
 
-async function deleteGroceryItem(req: Request, res: Response) {}
-
 module.exports = {
   updateGroceryItems,
   getGroceryItems,
-  deleteGroceryItem,
 };
