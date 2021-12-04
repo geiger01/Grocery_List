@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { ItemInput } from '../components/ItemInput'
 import { ItemList } from '../components/ItemList'
-import { groceryService } from '../services/grocery.service'
+import { groceryService, IGroceryItem } from '../services/grocery.service'
 
 export const GroceryPage = () => {
 
-    const [items, setItems] = useState<string[]>()
+    const [items, setItems] = useState<IGroceryItem[]>()
 
-    async function addItem(item: string) {
-
+    function addItem(item: string) {
         groceryService.addItem(item)
         loadItems()
     }
@@ -16,6 +15,12 @@ export const GroceryPage = () => {
     async function loadItems() {
         const items = await groceryService.getItems()
         setItems(items)
+    }
+
+    function markItem(itemIdx: number){
+        console.log(itemIdx);
+        groceryService.markItem(itemIdx)
+        loadItems()
     }
 
     useEffect(() => {
@@ -26,7 +31,7 @@ export const GroceryPage = () => {
 
     return (
         <>
-            <ItemList items={items} />
+            <ItemList items={items} markItem={markItem} />
             <ItemInput addItem={addItem} />
         </>
 

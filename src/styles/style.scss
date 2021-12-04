@@ -63,6 +63,10 @@ body {
     h3 {
       cursor: pointer;
       display: inline-block;
+
+      &.marked {
+        text-decoration: line-through 2px;
+      }
     }
   }
 }
