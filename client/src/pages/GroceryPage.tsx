@@ -5,11 +5,11 @@ import { groceryService, IGroceryItem } from '../services/grocery.service'
 
 export const GroceryPage = () => {
 
-    const [items, setItems] = useState<IGroceryItem[]>()
+    const [items, setItems] = useState<any>()
 
-    function addItem(item: string) {
-        groceryService.addItem(item)
-        loadItems()
+    async function addItem(item: string) {
+        const items = await groceryService.addItem(item)
+        setItems(items)
     }
 
     async function loadItems() {
@@ -17,10 +17,9 @@ export const GroceryPage = () => {
         setItems(items)
     }
 
-    function markItem(itemIdx: number){
-        console.log(itemIdx);
-        groceryService.markItem(itemIdx)
-        loadItems()
+    async function markItem(itemIdx: number) {
+        const items = await groceryService.markItem(itemIdx)
+        setItems(items)
     }
 
     useEffect(() => {

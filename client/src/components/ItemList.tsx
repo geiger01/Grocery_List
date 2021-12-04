@@ -3,11 +3,11 @@ import { IGroceryItem } from '../services/grocery.service'
 import { ItemPreview } from './ItemPreview'
 
 
-export const ItemList = ({ items, markItem }: { items: IGroceryItem[] | undefined, markItem: (idx: number) => void }) => {
+export const ItemList = ({ items, markItem }: { items: any | undefined, markItem: (idx: number) => void }) => {
 
     return (
         <main className="item-list">
-            {items && items.map((item, idx) => (
+            {items && items.data.map((item: any, idx: number) => (
                 <ItemPreview key={`grocery-item-${idx}`} item={item} idx={idx} markItem={markItem} />
             ))}
         </main>
