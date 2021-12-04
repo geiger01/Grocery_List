@@ -1,24 +1,20 @@
+import { storageService } from "./storage.service";
+
 export const groceryService = {
   addItem,
   getItems,
 };
 
-export interface IGroceryItem {
-  itemName: string;
-  desc?: string;
-}
-
-const items = [
-  {
-    itemName: "חלב",
-    desc: "רק חלב אחוז 1",
-  },
-];
+const STORAGE_KEY = "items";
 
 function addItem(item: string) {
-  console.log(item);
+  const items = storageService.loadFromStorage(STORAGE_KEY) || [];
+  items.unshift(item);
+  storageService.saveToStorage(STORAGE_KEY, items);
+
+  getItems()
 }
 
-function getItems(): Promise<IGroceryItem[]> {
-  return Promise.resolve(items);
+function getItems(): Promise<string[]> {
+  return Promise.resolve(storageService.loadFromStorage(STORAGE_KEY) || []);
 }

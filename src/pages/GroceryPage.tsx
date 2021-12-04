@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import { ItemInput } from '../components/ItemInput'
 import { ItemList } from '../components/ItemList'
-import { groceryService, IGroceryItem } from '../services/grocery.service'
+import { groceryService } from '../services/grocery.service'
 
 export const GroceryPage = () => {
 
-    const [items, setItems] = useState<IGroceryItem[]>()
+    const [items, setItems] = useState<string[]>()
 
     async function addItem(item: string) {
+
         groceryService.addItem(item)
+        loadItems()
     }
 
     async function loadItems() {

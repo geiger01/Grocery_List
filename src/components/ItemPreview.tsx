@@ -1,15 +1,10 @@
 import React from 'react'
-import { IGroceryItem } from '../services/grocery.service'
 
-interface IItemPreviewProps {
-    item: IGroceryItem
-}
 
-export const ItemPreview = ({ item }: IItemPreviewProps) => {
+export const ItemPreview = ({ item }: { item: string }) => {
     return (
         <div className="item-preview">
-            <h1>👈 {item.itemName}</h1>
-            <p>{item.desc}</p>
+            <h3>👈 {item}</h3>
         </div>
     )
 }

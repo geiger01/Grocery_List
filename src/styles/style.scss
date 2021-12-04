@@ -15,7 +15,7 @@ body {
   flex-direction: row-reverse;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 6px;
 
   .item-input {
     outline: none;
@@ -60,9 +60,9 @@ body {
   direction: rtl;
 
   .item-preview {
-    p {
-      font-size: 13px;
-      margin-top: -5px;
+    h3 {
+      cursor: pointer;
+      display: inline-block;
     }
   }
 }
