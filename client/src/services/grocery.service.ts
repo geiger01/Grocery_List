@@ -1,5 +1,3 @@
-import { storageService } from "./storage.service";
-
 import Axios from "axios";
 
 const BASE_URL =
@@ -13,12 +11,8 @@ export const groceryService = {
   addItem,
   getItems,
   markItem,
+  deleteList,
 };
-
-export interface IGroceryItem {
-  itemName: string;
-  isMarked: boolean;
-}
 
 async function addItem(item: string) {
   try {
@@ -38,6 +32,20 @@ async function markItem(itemIdx: number) {
   try {
     const items = await getItems();
     items.data[itemIdx].isMarked = !items.data[itemIdx].isMarked;
+    const updatedItems = await axios.post(
+      `${BASE_URL}/api/groceryItems`,
+      items
+    );
+    return updatedItems.data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+async function deleteList() {
+  try {
+    const items = await getItems();
+    items.data = [];
     const updatedItems = await axios.post(
       `${BASE_URL}/api/groceryItems`,
       items

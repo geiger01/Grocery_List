@@ -8,31 +8,22 @@ function connectSockets(http: any, session: any) {
     },
   });
   gIo.on("connection", (socket: any) => {
-    socket.on("disconnect", () => {
-      socket.to(socket.myRoom).emit("remove-all-pointers");
-    });
     // Signing in a room / creating a new room
-    socket.on("roomId", ({ roomId, myUserName }: any) => {
+    socket.on("roomId", ({ roomId }: any) => {
       if (socket.myRoom === roomId) return;
       if (socket.myRoom) {
         socket.leave(socket.myRoom);
       }
       socket.join(roomId);
       socket.myRoom = roomId;
-      socket.to(socket.myRoom).emit("user-joined", myUserName);
     });
 
-    socket.on("webApp", (webApp: any) => {
-      socket.to(socket.myRoom).emit("webApp return", webApp);
+    socket.on("update-list", (data: any) => {
+
+      console.log(data);
+      
+      socket.broadcast.to(socket.myRoom).emit("update-list-return", data);
     });
-    socket.on("end", (user: any) => {
-      socket.to(socket.myRoom).emit("user-left", user.name);
-      socket.broadcast.to(socket.myRoom).emit("remove-pointer", user.id);
-      socket.disconnect(0);
-    }),
-      socket.on("update-pointers", (data: any) => {
-        socket.broadcast.to(socket.myRoom).emit("show-pointers", data);
-      });
   });
 }
 
