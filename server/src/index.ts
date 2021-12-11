@@ -4,13 +4,13 @@ const app = express();
 const cors = require("cors");
 const path = require("path");
 const http = require("http").createServer(app);
-const expressSession = require('express-session');
+const expressSession = require("express-session");
 
 const session = expressSession({
-  secret: 'Give me food',
+  secret: "Give me food",
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: false }
+  cookie: { secure: false },
 });
 
 app.use(express.static("public"));
@@ -33,15 +33,15 @@ if (process.env.NODE_ENV === "production") {
 }
 
 const groceryItemsRoutes = require("./api/groceryItems/groceryItems.routes");
-const { connectSockets } = require('./services/socket.service')
+const { connectSockets } = require("./services/socket.service");
 
 // Routes
 app.use("/api/groceryItems", groceryItemsRoutes);
-connectSockets(http, session)
+connectSockets(http, session);
 
 app.get("/**", (req, res) => {
-  // res.sendFile(path.join(__dirname, "public", "index.html"));
-  res.send("whzaaaappp");
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+  // res.send("whzaaaappp");
 });
 
 const port = process.env.PORT || 3030;
